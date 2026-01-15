@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import { errors } from 'celebrate'; 
 import { connectMongoDB } from './db/connectMongoDB.js';
 import notesRoutes from './routes/notesRoutes.js';
 import { notFoundHandler } from './middleware/notFoundHandler.js';
@@ -24,6 +25,9 @@ const bootstrap = async () => {
     app.use(notesRoutes);
 
     app.use(notFoundHandler);
+
+    app.use(errors());
+
     app.use(errorHandler);
 
     app.listen(PORT, () => {
