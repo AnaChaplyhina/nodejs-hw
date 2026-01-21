@@ -10,23 +10,12 @@ const validateObjectId = (value, helpers) => {
 };
 
 export const createNoteSchema = Joi.object({
-  title: Joi.string().min(3).max(30).required(),
+  title: Joi.string().min(1).max(30).required(),
   content: Joi.string().allow('').optional(),
   tag: Joi.string()
     .valid(...TAGS)
     .optional(),
 });
-
-export const updateNoteSchema = Joi.object({
-  title: Joi.string().min(3).max(30).optional(),
-  content: Joi.string().allow('').optional(),
-  tag: Joi.string()
-    .valid(...TAGS)
-    .optional(),
-})
-  .min(1)
-  .message('Body must have at least one field');
-
 
 export const getAllNotesSchema = Joi.object({
   page: Joi.number().integer().min(1).default(1),
@@ -40,3 +29,21 @@ export const getAllNotesSchema = Joi.object({
 export const noteIdSchema = Joi.object({
   noteId: Joi.string().custom(validateObjectId, 'ObjectId validation').required(),
 });
+
+
+export const updateNoteSchema = {
+  body: Joi.object({
+    title: Joi.string().min(1).max(30).optional(),
+    content: Joi.string().allow('').optional(),
+    tag: Joi.string()
+      .valid(...TAGS)
+      .optional(),
+  })
+    .min(1)
+    .message('Body must have at least one field'),
+  params: Joi.object({
+    noteId: Joi.string()
+      .custom(validateObjectId, 'ObjectId validation')
+      .required(),
+  }),
+};
