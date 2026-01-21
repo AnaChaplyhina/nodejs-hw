@@ -11,6 +11,7 @@ export const getAllNotes = async (req, res, next) => {
       filter.tag = tag;
     }
 
+
     if (search) {
       filter.$text = { $search: search };
     }

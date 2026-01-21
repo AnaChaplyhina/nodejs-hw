@@ -24,7 +24,6 @@ router.get(
   getAllNotes,
 );
 
-
 router.get(
   '/notes/:noteId',
   celebrate({
