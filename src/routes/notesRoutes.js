@@ -40,14 +40,7 @@ router.post(
   createNote,
 );
 
-router.patch(
-  '/notes/:noteId',
-  celebrate({
-    params: noteIdSchema,
-    body: updateNoteSchema,
-  }),
-  updateNote,
-);
+router.patch('/notes/:noteId', celebrate(updateNoteSchema), updateNote);
 
 router.delete(
   '/notes/:noteId',
