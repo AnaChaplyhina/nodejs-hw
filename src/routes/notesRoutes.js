@@ -18,35 +18,31 @@ const router = Router();
 
 router.get(
   '/notes',
-  celebrate({
-    query: getAllNotesSchema,
-  }),
+  celebrate(getAllNotesSchema),
   getAllNotes,
 );
 
 router.get(
   '/notes/:noteId',
-  celebrate({
-    params: noteIdSchema,
-  }),
+  celebrate(noteIdSchema),
   getNoteById,
 );
 
 router.post(
   '/notes',
-  celebrate({
-    body: createNoteSchema,
-  }),
+  celebrate(createNoteSchema),
   createNote,
 );
 
-router.patch('/notes/:noteId', celebrate(updateNoteSchema), updateNote);
+router.patch(
+  '/notes/:noteId',
+  celebrate(updateNoteSchema),
+  updateNote,
+);
 
 router.delete(
   '/notes/:noteId',
-  celebrate({
-    params: noteIdSchema,
-  }),
+  celebrate(noteIdSchema),
   deleteNote,
 );
 
