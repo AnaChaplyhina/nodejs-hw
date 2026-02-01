@@ -10,8 +10,8 @@ export const registerUser = async (req, res, next) => {
 
     const user = await User.findOne({ email });
     if (user) {
-      // БУЛО: 409, СТАЛО: 400 (як вимагає автоперевірка)
-      throw createHttpError(409, 'Email in use');
+
+      throw createHttpError(400, 'Email in use');
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
