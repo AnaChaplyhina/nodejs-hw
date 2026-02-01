@@ -4,9 +4,9 @@ import { Note } from '../models/note.js';
 export const getAllNotes = async (req, res, next) => {
   try {
     const { page = 1, perPage = 10, tag, search } = req.query;
-    const userId = req.user._id; 
+    const userId = req.user._id;
 
-    const filter = { userId }; /
+    const filter = { userId }; 
 
     if (tag) {
       filter.tag = tag;
