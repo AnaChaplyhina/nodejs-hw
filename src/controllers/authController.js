@@ -1,7 +1,7 @@
 import createHttpError from 'http-errors';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import handlebars from 'handlebars'; 
+import handlebars from 'handlebars';
 import path from 'node:path';
 import fs from 'node:fs/promises';
 import { User } from '../models/user.js';
@@ -15,7 +15,7 @@ export const registerUser = async (req, res, next) => {
 
     const user = await User.findOne({ email });
     if (user) {
-      throw createHttpError(409, 'Email in use');
+      throw createHttpError(400, 'Email in use');
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
